@@ -14,6 +14,9 @@
     <meta name="apple-mobile-web-app-title" content="SSB2 Archive">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a5f'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E2%3C/text%3E%3C/svg%3E">
     
+    <!-- Umami Analytics (замените data-website-id на свой) -->
+    <script async defer data-website-id="00000000-0000-0000-0000-000000000000" src="https://cloud.umami.is/script.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -45,17 +48,11 @@
                         radial-gradient(circle at 80% 70%, rgba(30,58,95,0.3) 0%, transparent 60%);
         }
 
-        /* Стартовое соглашение (стекло) */
+        /* Стартовое соглашение */
         .agreement-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            transition: opacity 0.3s;
-            opacity: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 200; display: flex; align-items: center; justify-content: center;
+            padding: 20px; transition: opacity 0.3s; opacity: 1;
             background: rgba(232,237,243,0.3);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -67,8 +64,7 @@
             background: rgba(255,255,255,0.5);
             backdrop-filter: blur(25px) saturate(200%);
             -webkit-backdrop-filter: blur(25px) saturate(200%);
-            border-radius: 40px;
-            padding: 32px 28px;
+            border-radius: 40px; padding: 32px 28px;
             border: 1px solid rgba(255,255,255,0.6);
             box-shadow: 0 25px 50px -8px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.3) inset;
         }
@@ -84,61 +80,30 @@
         }
         body.dark-theme .agreement-card h1 { color: #ffffff; text-shadow: 0 2px 15px rgba(74,125,170,0.4); }
         .agreement-text {
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 18px;
-            margin: 20px 0;
-            font-size: 14px;
-            line-height: 1.5;
-            max-height: 280px;
-            overflow-y: auto;
-            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.3); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border-radius: 24px; padding: 18px;
+            margin: 20px 0; font-size: 14px; line-height: 1.5; max-height: 280px;
+            overflow-y: auto; border: 1px solid rgba(255,255,255,0.4);
         }
-        body.dark-theme .agreement-text {
-            background: rgba(0,0,0,0.2);
-            border-color: rgba(255,255,255,0.1);
-        }
-        .checkbox-row {
-            display: flex; align-items: center; gap: 12px; margin: 20px 0;
-        }
-        .checkbox-row input {
-            width: 20px; height: 20px; accent-color: #1e3a5f;
-        }
+        body.dark-theme .agreement-text { background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); }
+        .checkbox-row { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+        .checkbox-row input { width: 20px; height: 20px; accent-color: #1e3a5f; }
         .checkbox-row label { font-size: 15px; font-weight: 500; }
         .agreement-btn {
-            background: rgba(30,58,95,0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 60px;
-            padding: 16px 32px;
-            font-weight: 700;
-            font-size: 18px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            opacity: 0.5;
-            pointer-events: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            background: rgba(30,58,95,0.85); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); color: white;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 60px;
+            padding: 16px 32px; font-weight: 700; font-size: 18px; cursor: pointer;
+            width: 100%; transition: all 0.2s; text-transform: uppercase;
+            opacity: 0.5; pointer-events: none; box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .agreement-btn.active {
-            opacity: 1;
-            pointer-events: auto;
-            background: #1e3a5f;
-            box-shadow: 0 10px 25px rgba(30,58,95,0.4);
-        }
+        .agreement-btn.active { opacity: 1; pointer-events: auto; background: #1e3a5f; box-shadow: 0 10px 25px rgba(30,58,95,0.4); }
         .agreement-btn:active { transform: scale(0.97); }
-        .contacts {
-            margin-top: 20px; font-size: 14px; text-align: center;
-        }
+        .contacts { margin-top: 20px; font-size: 14px; text-align: center; }
         .contacts a { color: #1e3a5f; text-decoration: none; font-weight: 600; }
         body.dark-theme .contacts a { color: #8ab3d7; }
 
-        /* Основной интерфейс (стекло) */
+        /* Основной интерфейс */
         .app {
             max-width: 750px; margin: 0 auto; padding: 14px 14px 0;
             height: 100vh; display: flex; flex-direction: column;
@@ -162,33 +127,23 @@
         }
         body.dark-theme .header .sub { color: #a0c4e2; }
 
-        /* Вкладки (стекло + драг-скролл) */
+        /* Вкладки */
         .tabs-scroll {
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding-bottom: 6px;
-            margin-bottom: 10px;
-            max-width: 100%;
-            cursor: grab;
-            user-select: none;
+            overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; padding-bottom: 6px; margin-bottom: 10px; max-width: 100%;
+            cursor: grab; user-select: none;
         }
         .tabs-scroll:active { cursor: grabbing; }
         .tabs-scroll::-webkit-scrollbar { display: none; }
         .tabs {
-            display: inline-flex;
-            gap: 6px;
+            display: inline-flex; gap: 6px;
             background: rgba(255,255,255,0.4);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 40px;
-            padding: 5px;
+            border-radius: 40px; padding: 5px;
             border: 1px solid rgba(255,255,255,0.5);
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            pointer-events: none;  /* чтобы grab работал */
         }
-        .tabs-scroll .tabs { pointer-events: auto; }
         body.dark-theme .tabs {
             background: rgba(20,28,40,0.5);
             border-color: rgba(255,255,255,0.15);
@@ -201,31 +156,23 @@
         }
         body.dark-theme .tab { color: #c0d0e0; text-shadow: none; }
         .tab.active {
-            background: rgba(30,58,95,0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #fff;
+            background: rgba(30,58,95,0.9); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); color: #fff;
             box-shadow: 0 4px 12px rgba(30,58,95,0.3), 0 0 0 1px rgba(255,255,255,0.2) inset;
         }
         .tab:active { transform: scale(0.96); }
 
-        /* Поиск (стекло) */
+        /* Поиск */
         .search-box { margin-bottom: 10px; }
         .search-box input {
             width: 100%; padding: 11px 16px; border: none; border-radius: 40px;
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            font-size: 14px;
-            border: 1px solid rgba(255,255,255,0.6);
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            color: #0f1a2e;
+            background: rgba(255,255,255,0.5); backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%); font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.6); font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); color: #0f1a2e;
         }
         body.dark-theme .search-box input {
-            background: rgba(20,28,40,0.5);
-            border-color: rgba(255,255,255,0.15);
-            color: #e0e4eb;
+            background: rgba(20,28,40,0.5); border-color: rgba(255,255,255,0.15); color: #e0e4eb;
         }
         .search-box input:focus { outline: none; border-color: #1e3a5f; }
 
@@ -234,42 +181,25 @@
             flex: 1; overflow-y: auto; scrollbar-width: none; padding-bottom: 16px;
         }
         .pages::-webkit-scrollbar { display: none; }
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
+        .page { display: none; }
         .page.active-page { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
-        /* Карточки — максимальное жидкое стекло */
+        /* Карточки */
         .card {
-            background: rgba(255,255,255,0.4);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border-radius: 28px;
-            padding: 20px 22px;
-            margin-bottom: 12px;
+            background: rgba(255,255,255,0.4); backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%); border-radius: 28px;
+            padding: 20px 22px; margin-bottom: 12px;
             border: 1px solid rgba(255,255,255,0.7);
             box-shadow: 0 20px 40px -8px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.4) inset;
-            animation: cardAppear 0.25s ease;
             transition: transform 0.2s, box-shadow 0.2s;
+            content-visibility: auto;
+            contain-intrinsic-size: auto 300px;
         }
         body.dark-theme .card {
-            background: rgba(20,28,40,0.5);
-            border-color: rgba(255,255,255,0.15);
+            background: rgba(20,28,40,0.5); border-color: rgba(255,255,255,0.15);
             box-shadow: 0 20px 40px -8px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
         }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
-        }
-        @keyframes cardAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 25px 50px -8px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset; }
 
         h2 {
             font-weight: 700; font-size: 22px; letter-spacing: 0.5px; color: #0a1a2b;
@@ -292,43 +222,30 @@
         body.dark-theme .list-item .label { color: #8aa0b8; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
         .stat {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 18px;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border-radius: 18px; padding: 12px;
+            text-align: center; border: 1px solid rgba(255,255,255,0.4);
         }
         .stat-num { font-weight: 700; font-size: 24px; color: #1e3a5f; }
         body.dark-theme .stat-num { color: #a0c4e2; }
 
-        /* Цитирование (стекло) */
+        /* Цитирование */
         .quote-block { margin: 12px 0; }
         .quote-item {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-left: 4px solid #1e3a5f;
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); border-left: 4px solid #1e3a5f;
             padding: 10px 14px; margin-bottom: 6px; border-radius: 0 16px 16px 0;
-            font-size: 14px; font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 14px; font-weight: 500; border: 1px solid rgba(255,255,255,0.3);
             border-left-width: 4px;
         }
-        body.dark-theme .quote-item {
-            background: rgba(0,0,0,0.2);
-            border-left-color: #4a7daa;
-        }
+        body.dark-theme .quote-item { background: rgba(0,0,0,0.2); border-left-color: #4a7daa; }
 
-        /* Кнопка Показать больше (стекло) */
+        /* Кнопка Показать больше */
         .show-more-btn {
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
-            color: #1e3a5f;
-            padding: 6px 16px; border-radius: 30px; font-size: 13px; font-weight: 600;
-            cursor: pointer; margin-top: 8px; transition: 0.2s;
+            background: rgba(255,255,255,0.3); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5);
+            color: #1e3a5f; padding: 6px 16px; border-radius: 30px; font-size: 13px;
+            font-weight: 600; cursor: pointer; margin-top: 8px; transition: 0.2s;
         }
         body.dark-theme .show-more-btn { border-color: #4a7daa; color: #a0c4e2; }
         .show-more-btn:hover { background: rgba(30,58,95,0.2); }
@@ -340,12 +257,73 @@
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
         }
         .fav-btn.active { opacity: 1; color: #f0c45a; }
+
+        /* Блок реакций */
+        .reaction-block {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .reaction-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a2e44;
+        }
+        body.dark-theme .reaction-label { color: #c0c7d0; }
+        .reaction-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .reaction-btn {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #1e3a5f;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        body.dark-theme .reaction-btn {
+            background: rgba(20,28,40,0.5);
+            border-color: rgba(255,255,255,0.15);
+            color: #c0d0e0;
+        }
+        .reaction-btn:hover {
+            background: rgba(30,58,95,0.2);
+            border-color: #1e3a5f;
+        }
+        .reaction-btn.selected {
+            background: #1e3a5f;
+            color: white;
+            border-color: #1e3a5f;
+        }
+        .reaction-btn:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .reaction-thanks {
+            font-size: 13px;
+            color: #1e3a5f;
+            font-weight: 500;
+        }
+        body.dark-theme .reaction-thanks { color: #8ab3d7; }
+
         .scroll-top {
             position: fixed; bottom: 18px; right: 18px;
-            background: rgba(30,58,95,0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: #fff;
+            background: rgba(30,58,95,0.7); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); color: #fff;
             width: 40px; height: 40px; border-radius: 30px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; opacity: 0; pointer-events: none;
@@ -355,9 +333,7 @@
         }
         .scroll-top.visible { opacity: 1; pointer-events: auto; }
 
-        @media (max-width: 500px) {
-            .grid-2 { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -384,111 +360,106 @@
     <!-- Основное приложение -->
     <div class="app" id="mainApp">
         <div class="scroll-top" id="scrollTop">↑</div>
-
         <div class="header">
             <div>
                 <h1>Simple Sandbox 2 Archives</h1>
-                <div class="sub">Сайт сделал HoFiLiOn | Версия сайта 1.0.0 Beta</div>
+                <div class="sub">Версия: 1.0.2 Beta</div>
             </div>
         </div>
-
         <div class="tabs-scroll" id="tabsScroll">
             <div class="tabs" id="tabsContainer"></div>
         </div>
-
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Поиск по теме...">
+            <input type="text" id="searchInput" placeholder="Поиск по теме...">
         </div>
-
         <div class="pages" id="pagesContainer"></div>
     </div>
 
     <script>
-        // Service Worker для PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register("data:application/javascript,self.addEventListener('install',e=>{e.waitUntil(caches.open('ssb2-v4').then(c=>c.addAll(['/'])));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});");
-            });
-        }
-
         (function(){
-            // Элементы
+            // Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("data:application/javascript,self.addEventListener('install',e=>{e.waitUntil(caches.open('ssb2-v8').then(c=>c.addAll(['/'])));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});");
+            }
+
+            // Telegram Bot Config
+            const TG_BOT_TOKEN = '8786399001:AAF2GODnsIrCluHiFPH8XYC8uVMuPrDiSss';
+            const TG_CHAT_ID = '7040677455';
+            
+            async function sendTelegramMessage(text) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: TG_CHAT_ID,
+                            text: text,
+                            parse_mode: 'HTML'
+                        })
+                    });
+                } catch (e) {
+                    console.warn('Telegram send failed:', e);
+                }
+            }
+
             const agreementScreen = document.getElementById('agreementScreen');
             const agreeCheck = document.getElementById('agreeCheck');
             const agreeBtn = document.getElementById('agreeBtn');
             const mainApp = document.getElementById('mainApp');
             const tabsScroll = document.getElementById('tabsScroll');
 
-            // Drag-to-scroll для вкладок
+            // Drag-to-scroll
             let isDown = false, startX, scrollLeft;
-            tabsScroll.addEventListener('mousedown', (e) => {
-                isDown = true;
-                tabsScroll.classList.add('active');
-                startX = e.pageX - tabsScroll.offsetLeft;
-                scrollLeft = tabsScroll.scrollLeft;
-            });
-            tabsScroll.addEventListener('mouseleave', () => { isDown = false; tabsScroll.classList.remove('active'); });
-            tabsScroll.addEventListener('mouseup', () => { isDown = false; tabsScroll.classList.remove('active'); });
-            tabsScroll.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - tabsScroll.offsetLeft;
-                const walk = (x - startX) * 1.5;
-                tabsScroll.scrollLeft = scrollLeft - walk;
-            });
+            tabsScroll.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - tabsScroll.offsetLeft; scrollLeft = tabsScroll.scrollLeft; });
+            tabsScroll.addEventListener('mouseleave', () => { isDown = false; });
+            tabsScroll.addEventListener('mouseup', () => { isDown = false; });
+            tabsScroll.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - tabsScroll.offsetLeft; tabsScroll.scrollLeft = scrollLeft - (x - startX) * 1.5; });
 
-            // Проверка согласия
             if (localStorage.getItem('ssb2_agreed') === 'true') {
-                agreementScreen.classList.add('hidden');
-                mainApp.classList.add('visible');
+                agreementScreen.classList.add('hidden'); mainApp.classList.add('visible');
             }
-
-            agreeCheck.addEventListener('change', () => {
-                agreeBtn.disabled = !agreeCheck.checked;
-                agreeBtn.classList.toggle('active', agreeCheck.checked);
-            });
-
-            agreeBtn.addEventListener('click', () => {
-                if (!agreeCheck.checked) return;
-                localStorage.setItem('ssb2_agreed', 'true');
-                agreementScreen.classList.add('hidden');
-                mainApp.classList.add('visible');
-            });
+            agreeCheck.addEventListener('change', () => { agreeBtn.disabled = !agreeCheck.checked; agreeBtn.classList.toggle('active', agreeCheck.checked); });
+            agreeBtn.addEventListener('click', () => { if (!agreeCheck.checked) return; localStorage.setItem('ssb2_agreed', 'true'); agreementScreen.classList.add('hidden'); mainApp.classList.add('visible'); });
 
             // Вкладки
             const themes = [
-                { id: 'about', label: 'Об игре' },
-                { id: 'dev', label: 'Разраб' },
-                { id: 'media', label: 'Медиа' },
-                { id: 'maps', label: 'Карты' },
-                { id: 'props', label: 'Пропы' },
-                { id: 'skins', label: 'Скины' },
-                { id: 'weapons', label: 'Оружие' },
-                { id: 'vehicles', label: 'Транспорт' },
-                { id: 'clans', label: 'Кланы' },
-                { id: 'facts', label: 'Факты' },
-                { id: 'versions', label: 'Версии' },
-                { id: 'mods', label: 'Моды' },
-                { id: 'reqs', label: 'Требования' },
-                { id: 'feedback', label: '💬 Обратная связь' },
-                { id: 'fav', label: '⭐ Избранное' }
+                { id: 'about', label: 'Об игре' }, { id: 'dev', label: 'Разраб' }, { id: 'media', label: 'Медиа' },
+                { id: 'maps', label: 'Карты' }, { id: 'props', label: 'Пропы' }, { id: 'skins', label: 'Скины' },
+                { id: 'weapons', label: 'Оружие' }, { id: 'vehicles', label: 'Транспорт' }, { id: 'clans', label: 'Кланы' },
+                { id: 'facts', label: 'Факты' }, { id: 'versions', label: 'Версии' }, { id: 'mods', label: 'Моды' },
+                { id: 'reqs', label: 'Требования' }, { id: 'donate', label: 'Донат' }, { id: 'feedback', label: 'Обратная связь' },
+                { id: 'eastereggs', label: 'Пасхалки' }, { id: 'fav', label: 'Избранное' }
             ];
 
-            // Полный контент (с пометками в медиа)
-            const content = {
-                about: `<h2>Об игре <button class="fav-btn" data-id="about">★</button></h2>
+            // Генераторы контента (с блоком реакций)
+            function wrapWithReactions(contentHtml, tabId) {
+                return contentHtml + `
+                    <div class="reaction-block" data-tab="${tabId}">
+                        <span class="reaction-label">Информация полезна?</span>
+                        <div class="reaction-buttons">
+                            <button class="reaction-btn" data-reaction="useful">👍 Полезно</button>
+                            <button class="reaction-btn" data-reaction="neutral">😐 Так себе</button>
+                            <button class="reaction-btn" data-reaction="outdated">👎 Устарело</button>
+                        </div>
+                        <span class="reaction-thanks"></span>
+                    </div>
+                `;
+            }
+
+            const contentGenerators = {
+                about: () => wrapWithReactions(`<h2>Об игре <button class="fav-btn" data-id="about">★</button></h2>
                     <p>Simple Sandbox 2 — вторая игра из серии "Simple Sandbox". Разработчик: Игорь Подгайный (Madness Games). Вышла 22 сентября 2019 на Android и 13 марта 2021 на iOS. Более 10 миллионов скачиваний.</p>
                     <div class="grid-2">
-                        <div class="stat"><div class="stat-num">10M+</div>загрузок</div>
-                        <div class="stat"><div class="stat-num">4.0★</div>Google Play</div>
-                        <div class="stat"><div class="stat-num">3.8★</div>App Store</div>
+                        <div class="stat"><div class="stat-num">11,932,436</div>загрузок +-</div>
+                        <div class="stat"><div class="stat-num">3.7★</div>Google Play</div>
+                        <div class="stat"><div class="stat-num">3.6★</div>App Store</div>
                         <div class="stat"><div class="stat-num">Unity</div>Движок</div>
                     </div>
                     <p>По сравнению с SSB1 сильно изменилась (но SSB1 многие считают лучшей). По сравнению с SSB3 пока лучше.</p>
                     <h3>История</h3>
                     <p>Разработка началась в 2018. В 2020 игру удалили из Play Store по причинам, связанным с авторскими правами, позже восстановили. Пик популярности пришёлся на 2020–2021. В 2023 удалена карта F_RaceMar из-за копирайта с Garry's Mod. Сейчас игра получает редкие, но стабильные обновления.</p>
-                    <p>Используется Photon PUN Classic (p2p), что облегчает взлом. Русскоязычных игроков больше, чем англоговорящих.</p>`,
-                dev: `<h2>Разработчик <button class="fav-btn" data-id="dev">★</button></h2>
+                    <p>Используется Photon PUN Classic (p2p), что облегчает взлом. Русскоязычных игроков больше, чем англоговорящих.</p>`, 'about'),
+                dev: () => wrapWithReactions(`<h2>Разработчик <button class="fav-btn" data-id="dev">★</button></h2>
                     <div style="display:flex; gap:14px; align-items:center; margin-bottom:10px;">
                         <span style="font-size:42px;">👨‍💻</span>
                         <div><span style="font-weight:700; font-size:20px;">Игорь Подгайный</span><br>Ihor Pidhainyi · Kr3shPro · Madness Games</div>
@@ -501,8 +472,9 @@
                         <li>Скин античита доступен только разработчику</li>
                         <li>Питомцы (собака и кот) — отсылка к его домашним животным</li>
                         <li>Скин тестера можно получить только по анкете</li>
-                    </ul>`,
-                media: `<h2>Медиа <button class="fav-btn" data-id="media">★</button></h2>
+                    </ul>
+                    <p style="margin-top:12px; font-style:italic; color:#555;">Примечание: точный состав команды Madness Games в открытых источниках не публикуется.</p>`, 'dev'),
+                media: () => wrapWithReactions(`<h2>Медиа <button class="fav-btn" data-id="media">★</button></h2>
                     <h3>🎬 Фильмы и сериалы | Новинки</h3>
                     <div class="quote-block" id="filmsBlock">
                         <div class="quote-item">Сила вины</div><div class="quote-item">Интеллигенты</div><div class="quote-item">Эд Гейн - Монстр из Висконсина</div>
@@ -572,8 +544,8 @@
                         <div class="quote-item">Альфа SSB2</div><div class="quote-item">Люцифер YT</div><div class="quote-item">RDAS Україн</div>
                         <div class="quote-item">Тарак</div><div class="quote-item">Македонтол</div><div class="quote-item">ased</div>
                     </div>
-                    <button class="show-more-btn" data-target="ytBlock" data-limit="30">Показать больше</button>`,
-                maps: `<h2>Карты <button class="fav-btn" data-id="maps">★</button></h2>
+                    <button class="show-more-btn" data-target="ytBlock" data-limit="30">Показать больше</button>`, 'media'),
+                maps: () => wrapWithReactions(`<h2>Карты <button class="fav-btn" data-id="maps">★</button></h2>
                     <h3>Существующие карты</h3>
                     <div class="quote-block" id="mapsBlock">
                         <div class="quote-item">f_Grass</div><div class="quote-item">f_Sand</div><div class="quote-item">f_AirPort</div><div class="quote-item">f_Port</div>
@@ -585,8 +557,8 @@
                     </div>
                     <button class="show-more-btn" data-target="mapsBlock" data-limit="15">Показать больше</button>
                     <h3>Удалённые карты</h3>
-                    <p>f_RacerMap, f_Nightcircus, f_Farm, f_Scificity, F_RaceMar.</p>`,
-                props: `<h2>Пропы <button class="fav-btn" data-id="props">★</button></h2>
+                    <p>f_RacerMap, f_Nightcircus, f_Farm, f_Scificity, F_RaceMar.</p>`, 'maps'),
+                props: () => wrapWithReactions(`<h2>Пропы <button class="fav-btn" data-id="props">★</button></h2>
                     <p><strong>Лимит объектов:</strong> 50 000 в одиночной, 998 в мультиплеере.</p>
                     <h3>Наборы пропов</h3>
                     <div class="list-item"><span class="label">Default</span><span class="value">Roofs, Environment, Icon</span></div>
@@ -596,94 +568,140 @@
                     <div class="list-item"><span class="label">Space</span><span class="value">65💎</span></div>
                     <div class="list-item"><span class="label">Apocalypse</span><span class="value">Донат</span></div>
                     <div class="list-item"><span class="label">Big City</span><span class="value">200💎</span></div>
-                    <p>Для строительства небоскрёбов чаще всего используют набор Space.</p>`,
-                skins: `<h2>Скины <button class="fav-btn" data-id="skins">★</button></h2>
+                    <p>Для строительства небоскрёбов чаще всего используют набор Space.</p>`, 'props'),
+                skins: () => wrapWithReactions(`<h2>Скины <button class="fav-btn" data-id="skins">★</button></h2>
                     <p>Более 250 скинов. Аксессуары (шляпы, рюкзаки).</p>
                     <h3>Особые скины</h3>
                     <div class="list-item"><span class="label">Звёздный мальчик</span><span class="value">600 000💎</span></div>
                     <div class="list-item"><span class="label">Ютубер</span><span class="value">7k подписчиков</span></div>
                     <div class="list-item"><span class="label">Тестер / Античит</span><span class="value">Избранные</span></div>
-                    <div class="list-item"><span class="label">Дьявол</span><span class="value">Хэллоуинский паркур</span></div>`,
-                weapons: `<h2>Оружие <button class="fav-btn" data-id="weapons">★</button></h2>
+                    <div class="list-item"><span class="label">Дьявол</span><span class="value">Хэллоуинский паркур</span></div>`, 'skins'),
+                weapons: () => wrapWithReactions(`<h2>Оружие <button class="fav-btn" data-id="weapons">★</button></h2>
                     <div class="list-item"><span class="label">Пистолет</span><span class="value">Урон ~25</span></div>
                     <div class="list-item"><span class="label">Автомат</span><span class="value">Урон ~18</span></div>
                     <div class="list-item"><span class="label">Снайперская</span><span class="value">Урон 90</span></div>
                     <div class="list-item"><span class="label">Дробовик</span><span class="value">Урон 80</span></div>
                     <div class="list-item"><span class="label">Гранатомёт</span><span class="value">Урон 150</span></div>
-                    <p><strong>Ядерная бомба:</strong> в мультиплеере 3 шт., в одиночной — неограниченно.</p>`,
-                vehicles: `<h2>Транспорт <button class="fav-btn" data-id="vehicles">★</button></h2>
+                    <p><strong>Ядерная бомба:</strong> в мультиплеере 3 шт., в одиночной — неограниченно.</p>`, 'weapons'),
+                vehicles: () => wrapWithReactions(`<h2>Транспорт <button class="fav-btn" data-id="vehicles">★</button></h2>
                     <div class="list-item"><span class="label">Наземный</span><span class="value">Машины, танки</span></div>
                     <div class="list-item"><span class="label">Воздушный</span><span class="value">Самолёты, вертолёты</span></div>
                     <div class="list-item"><span class="label">Водный</span><span class="value">Лодки, катера</span></div>
                     <div class="list-item"><span class="label">Роботы</span><span class="value">—</span></div>
-                    <p>Гаечным ключом можно чинить колёса.</p>`,
-                clans: `<h2>Кланы <button class="fav-btn" data-id="clans">★</button></h2>
-                    <p><strong>ARES</strong> — самый влиятельный клан. Шенатор (#1 ролевые), Кафка (#1 снайпер).</p>`,
-                facts: `<h2>Факты и баги <button class="fav-btn" data-id="facts">★</button></h2>
+                    <p>Гаечным ключом можно чинить колёса.</p>`, 'vehicles'),
+                clans: () => wrapWithReactions(`<h2>Кланы <button class="fav-btn" data-id="clans">★</button></h2>
+                    <p>В Simple Sandbox 2 кланы играли значительную роль, особенно в период активного PvP. Сила кланов определялась численностью, боевыми навыками, политическим влиянием и умением вести длительные конфликты.</p>
+                    <h3>Известные кланы</h3>
+                    <div class="quote-item"><strong>ARES</strong> (ранее ARE) — сильнейший клан по политической власти. Пользовался уважением моддеров (Bombhacker, Lider Turk), тестировщиков и разработчика Игоря Подгайного.</div>
+                    <div class="quote-item"><strong>SPRS, DSR, NAR, UNI</strong> — доминировали в раннюю эпоху за счёт численности и слаженности в PvP.</div>
+                    <h3>Лидеры кланов</h3>
+                    <div class="quote-item"><strong>Шенатор</strong> — занимал 1-е место в RPG. Приобрёл большой боевой опыт в UNI.</div>
+                    <div class="quote-item"><strong>Кафка (AFK)</strong> — занимал 1-е место среди снайперов. Развивал навыки в немецком сообществе.</div>
+                    <p style="margin-top:12px;">Войны кланов часто сводились к испытанию на выносливость, а не к активным боям.</p>`, 'clans'),
+                facts: () => wrapWithReactions(`<h2>Факты и баги <button class="fav-btn" data-id="facts">★</button></h2>
                     <ul style="padding-left:18px;">
                         <li>Русскоязычных больше</li><li>Android получает обновления раньше</li>
                         <li>Баг с дверями</li><li>Баг переворота</li>
                         <li>Мифы: Крабмен, Статуя, Водомен</li>
                         <li>Система погоды: солнечно, снег, дождь, гроза, буря</li>
                         <li>Новые механизмы: барьер, редактор подсветки, пропы ускорения</li>
-                    </ul>`,
-                versions: `<h2>Версии <button class="fav-btn" data-id="versions">★</button></h2>
+                    </ul>`, 'facts'),
+                versions: () => wrapWithReactions(`<h2>Версии <button class="fav-btn" data-id="versions">★</button></h2>
                     <p><strong>Ранние:</strong> 0.2.1, 0.2.7, 0.3.8, 0.6.4, 0.7.1, 0.7.6, 0.7.8, 0.8.7, 0.9.0, 1.0.0, 1.2.0, 1.6.0, 1.6.4</p>
-                    <p><strong>Современные:</strong> 1.8.00, 1.8.11, 1.8.20, 1.8.30, 1.9.05, 1.9.06, 1.9.08, 1.9.26, 1.9.30, 1.9.37, 1.9.41, 1.9.45, 1.9.49, 1.9.51</p>`,
-                mods: `<h2>Моды <button class="fav-btn" data-id="mods">★</button></h2>
-                    <p><strong>Polar Patcher</strong> — взлом. <strong>GAZ Mod</strong> — популярный мод.</p>`,
-                reqs: `<h2>Требования <button class="fav-btn" data-id="reqs">★</button></h2>
+                    <p><strong>Современные:</strong> 1.8.00, 1.8.11, 1.8.20, 1.8.30, 1.9.05, 1.9.06, 1.9.08, 1.9.26, 1.9.30, 1.9.37, 1.9.41, 1.9.45, 1.9.49, 1.9.51</p>`, 'versions'),
+                mods: () => wrapWithReactions(`<h2>Моды <button class="fav-btn" data-id="mods">★</button></h2>
+                    <p><strong>Polar Patcher</strong> — взлом. <strong>GAZ Mod</strong> — популярный мод.</p>`, 'mods'),
+                reqs: () => wrapWithReactions(`<h2>Требования <button class="fav-btn" data-id="reqs">★</button></h2>
                     <div class="list-item"><span class="label">Android</span><span class="value">5.0+, 2 ГБ ОЗУ</span></div>
-                    <div class="list-item"><span class="label">iOS</span><span class="value">11.0+, iPhone 6s+</span></div>`,
-                feedback: `<h2>💬 Обратная связь</h2>
+                    <div class="list-item"><span class="label">iOS</span><span class="value">11.0+, iPhone 6s+</span></div>`, 'reqs'),
+                donate: () => wrapWithReactions(`<h2>Донат <button class="fav-btn" data-id="donate">★</button></h2>
+                    <h3>VIP навсегда</h3>
+                    <div class="quote-item">Нет рекламы · Веревка · +40 друзей · Доход x1.75 · Макс. игроков 15 · Скин Cyber Punks · Отключение PVP</div>
+                    <p><strong>Цена: 1 799,00 ₽</strong></p>
+                    <h3>Наборы со скидками</h3>
+                    <div class="quote-item"><strong>Starter Pack</strong> — 349,99 ₽ (Draven, Elara)</div>
+                    <div class="quote-item"><strong>Elite Bundle</strong> — 399,00 ₽ (старая 1 599,00 ₽) | Скидка 75%</div>
+                    <div class="quote-item"><strong>Байкерский Пак</strong> — 449,99 ₽ (старая 4 499,99 ₽)</div>
+                    <div class="quote-item"><strong>USA ARMY</strong> — 499,00 ₽ (M1 ABRAMS, F-16, MATV, старая 999,00 ₽)</div>
+                    <div class="quote-item"><strong>Армия Германии</strong> — 599,00 ₽ (старая 2 390,00 ₽)</div>
+                    <div class="quote-item"><strong>Армия Казахстана</strong> — 599,00 ₽ (старая 5 999,00 ₽)</div>
+                    <div class="quote-item"><strong>Японская Армия</strong> — 590,00 ₽ (старая 2 390,00 ₽)</div>
+                    <div class="quote-item"><strong>Бразильская армия</strong> — 425,00 ₽ (старая 950,00 ₽, GUARANI, KC-390)</div>
+                    <div class="quote-item"><strong>British Pack</strong> — 349,99 ₽ (старая 999,99 ₽)</div>
+                    <div class="quote-item"><strong>Racer Pack</strong> — 399,00 ₽ (старая 1 599,00 ₽)</div>
+                    <h3>Кейсы и цены</h3>
+                    <div class="quote-item">Racer: 35 000 | Snow: 32 500 | Normal: от 99 до 40 000</div>
+                    <p>Редкости: Common, Rare, Mythical, Legendary, Immortal. Дубликаты возвращают 50% стоимости.</p>
+                    <h3>Другие товары</h3>
+                    <div class="quote-item">WW2 Pack — 799,99 ₽ | Apocalypse Pack — 899,99 ₽ | Apocalypse Interiors — 249,99 ₽</div>
+                    <div class="quote-item">Halloween Skin #1/#2 — 199,99 ₽ | HD SKIN — 249,99 ₽ | Mafia Skin — 225,00 ₽</div>
+                    <div class="quote-item">Creatures Skins — 149,99 ₽ | Robot Pack — 149,00 ₽ | Heli Pack — 139,00 ₽</div>
+                    <div class="quote-item">Vehicle Pack — 199,99 ₽ | Car#1 — 199,00 ₽ | Air Pack — 299,00 ₽ | Retro Pack — 209,00 ₽</div>
+                    <div class="quote-item">Skins REKT — 159,00 ₽ | Water REKT — 189,00 ₽ | RPG2.0 — 179,00 ₽ | Mini-Gun MH1 — 199,00 ₽</div>`, 'donate'),
+                feedback: () => wrapWithReactions(`<h2>Обратная связь</h2>
                     <div class="card">
                         <p><strong>Нашли баг или хотите предложить новую информацию?</strong></p>
                         <p>Напишите мне, и я добавлю данные на сайт:</p>
                         <div style="margin-top: 20px;">
                             <div class="list-item"><span class="label">Telegram</span><span class="value"><a href="https://t.me/HoFiLiOnclkc">@HoFiLiOnclkc</a></span></div>
-                            <div class="list-item"><span class="label">Email</span><span class="value"><a href="mailto:hofilionclkc@gmail.com">hofilionclkc@gmail.com</a></span></div>
+                            <div class="list-item"><span class="label">Email</span><span class="value"><a href="mailto:HoFiLiOn@gmail.com">HoFiLiOn@gmail.com</a></span></div>
                         </div>
-                    </div>`,
-                fav: `<h2>Избранное</h2><div id="favContent">Нет избранных тем. Нажмите ★ у любой темы.</div>`
+                    </div>`, 'feedback'),
+                eastereggs: () => wrapWithReactions(`<h2>Пасхалки <button class="fav-btn" data-id="eastereggs">★</button></h2>
+                    <p>В игре Simple Sandbox 2 есть несколько пасхалок и секретных элементов, которые можно разблокировать или найти на определённых картах.</p>
+                    <h3>Список пасхалок</h3>
+                    <div class="quote-block" id="easterEggsBlock">
+                        <div class="quote-item"><strong>Alien Skin (скин пришельца).</strong> Чтобы его получить, нужно играть в игру между 00:00 и 01:00 и зайти на карту Big City (f_BigCity).</div>
+                        <div class="quote-item"><strong>Cameraman Skin и NPC Speakerman (скин оператора и NPC диктора).</strong> На карте Island (f_Island) нужно найти скрытый подводный туннель, который ведёт в комнату с камерами наблюдения и шкафчиками. В одном из шкафчиков находится скин и NPC.</div>
+                        <div class="quote-item"><strong>Red Cube Guy Skin (скин парня в красном кубе).</strong> Этот скин можно разблокировать в режиме приключения (adventure/story mode).</div>
+                        <div class="quote-item"><strong>Penguin Skin (скин пингвина).</strong> Нужно играть на любой карте, зайти в меню реквизита (prop menu), выбрать мини-локацию и разместить ту, где есть igoos. В одном из них будет NPC-пингвин, с которым можно взаимодействовать, чтобы разблокировать скин. После этого скин не появится в меню магазина — чтобы его надеть, нужно разместить предмет одежды и взаимодействовать с ним.</div>
+                        <div class="quote-item"><strong>Ghost Girl Skin (скин призрачной девушки).</strong> Находится на карте gmBog (f_gm_Bog).</div>
+                        <div class="quote-item"><strong>Two Hat Items (два головных убора).</strong> На карте gmBog (f_gm_Bog) нужно найти дом с компьютером и ввести трёхзначный код.</div>
+                        <div class="quote-item"><strong>White and Orange Bag (белая и оранжевая сумка).</strong> Чтобы её получить, нужно зайти на карту f_Space_Map, спуститься по лестнице до второй палубы. В большом пустом коридоре слева будет дверь, которую можно открыть, там и находится сумка.</div>
+                        <div class="quote-item"><strong>Blue Car (синяя машина).</strong> Нужно зайти на карту f_RussianStreet и пройти некоторое расстояние в радиоактивной зоне.</div>
+                        <div class="quote-item"><strong>Animal Head Thing (предмет в виде головы животного).</strong> На карте f_RussianStreet в конце карты нужно найти дом с ключом, висящим на нём. Возьмите ключ и войдите в дом.</div>
+                    </div>
+                    <p style="margin-top:12px;">Некоторые пасхалки и секреты могут быть связаны с обновлениями игры или багами. Например, в одном из видео упоминались такие элементы, как «откопать могилу» (приз > скин) и «поймать нож на антенне» (приз > нож), но из-за бага могилу на тот момент раскопать было невозможно.</p>`, 'eastereggs'),
+                fav: () => `<h2>Избранное</h2><div id="favContent">Нет избранных тем. Нажмите ★ у любой темы.</div>`
             };
 
-            // Логика избранного и рендеринга
+            const contentCache = {};
+            function getContent(id) {
+                if (!contentCache[id] && contentGenerators[id]) contentCache[id] = contentGenerators[id]();
+                return contentCache[id] || '';
+            }
+
             let favorites = JSON.parse(localStorage.getItem('ssb2_fav') || '[]');
             const tabsDiv = document.getElementById('tabsContainer');
             const pagesDiv = document.getElementById('pagesContainer');
 
             function renderFavContent() {
                 if (favorites.length === 0) return '<p>Нет избранных тем. Нажмите ★ у любой темы.</p>';
-                return favorites.map(id => {
-                    const theme = themes.find(t => t.id === id);
-                    const cont = content[id] || '';
-                    return `<div class="card" style="margin-top:10px;"><h3>${theme?.label || id}</h3>${cont.replace(/<button.*?<\/button>/, '')}</div>`;
-                }).join('');
+                return favorites.map(id => `<div class="card"><h3>${themes.find(t=>t.id===id)?.label}</h3>${getContent(id).replace(/<button.*?<\/button>/, '')}</div>`).join('');
             }
 
             function renderTabs() {
                 tabsDiv.innerHTML = themes.map(t => `<button class="tab ${t.id==='about'?'active':''}" data-tab="${t.id}">${t.label}</button>`).join('');
             }
 
-            function renderPages() {
-                pagesDiv.innerHTML = themes.map(t => {
-                    let html = content[t.id];
-                    if (t.id === 'fav') html = `<h2>Избранное</h2><div id="favContent">${renderFavContent()}</div>`;
-                    return `<div class="page ${t.id==='about'?'active-page':''}" id="page-${t.id}"><div class="card">${html}</div></div>`;
-                }).join('');
-                attachFavListeners();
+            function renderPage(tabId) {
+                const page = document.getElementById(`page-${tabId}`);
+                if (page && page.innerHTML) return;
+                const html = tabId === 'fav' ? `<h2>Избранное</h2><div id="favContent">${renderFavContent()}</div>` : getContent(tabId);
+                if (page) page.innerHTML = `<div class="card">${html}</div>`;
+                if (tabId === 'fav') attachFavListeners();
                 initShowMore();
+                initReactionButtons();
             }
 
             function switchTab(tabId) {
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-                document.getElementById(`page-${tabId}`).classList.add('active-page');
+                const page = document.getElementById(`page-${tabId}`);
+                page.classList.add('active-page');
                 document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
-                if (tabId === 'fav') {
-                    document.getElementById('favContent').innerHTML = renderFavContent();
-                }
+                renderPage(tabId);
+                if (tabId === 'fav') document.getElementById('favContent').innerHTML = renderFavContent();
                 document.getElementById('searchInput').value = '';
-                document.querySelectorAll('.card').forEach(c => c.style.display = '');
             }
 
             function attachFavListeners() {
@@ -691,61 +709,105 @@
                     btn.addEventListener('click', e => {
                         e.stopPropagation();
                         const id = btn.dataset.id;
-                        if (favorites.includes(id)) {
-                            favorites = favorites.filter(f => f !== id);
-                            btn.classList.remove('active');
-                        } else {
-                            favorites.push(id);
-                            btn.classList.add('active');
-                        }
+                        if (favorites.includes(id)) favorites = favorites.filter(f => f !== id);
+                        else favorites.push(id);
                         localStorage.setItem('ssb2_fav', JSON.stringify(favorites));
+                        btn.classList.toggle('active', favorites.includes(id));
                         if (document.querySelector('.tab.active')?.dataset.tab === 'fav') {
                             document.getElementById('favContent').innerHTML = renderFavContent();
                         }
                     });
-                    if (favorites.includes(btn.dataset.id)) btn.classList.add('active');
+                    btn.classList.toggle('active', favorites.includes(btn.dataset.id));
                 });
             }
 
             function initShowMore() {
                 document.querySelectorAll('.show-more-btn').forEach(btn => {
-                    const targetId = btn.dataset.target;
-                    const block = document.getElementById(targetId);
-                    if (!block) return;
-                    const items = Array.from(block.children);
+                    const target = document.getElementById(btn.dataset.target);
+                    if (!target) return;
+                    const items = Array.from(target.children);
                     const limit = parseInt(btn.dataset.limit) || 15;
                     let expanded = false;
-                    items.forEach((item, index) => {
-                        if (index >= limit) item.classList.add('hidden-items');
-                    });
+                    items.forEach((item, i) => { if (i >= limit) item.classList.add('hidden-items'); });
                     if (items.length <= limit) btn.style.display = 'none';
-                    btn.addEventListener('click', () => {
-                        items.forEach((item, index) => {
-                            if (index >= limit) item.classList.toggle('hidden-items');
-                        });
+                    btn.onclick = () => {
+                        items.forEach((item, i) => { if (i >= limit) item.classList.toggle('hidden-items'); });
                         expanded = !expanded;
                         btn.textContent = expanded ? 'Свернуть' : 'Показать больше';
+                    };
+                });
+            }
+
+            // Реакции
+            function initReactionButtons() {
+                document.querySelectorAll('.reaction-block').forEach(block => {
+                    const tabId = block.dataset.tab;
+                    const storageKey = `reaction_${tabId}`;
+                    const saved = localStorage.getItem(storageKey);
+                    const buttons = block.querySelectorAll('.reaction-btn');
+                    const thanksSpan = block.querySelector('.reaction-thanks');
+                    
+                    if (saved) {
+                        buttons.forEach(btn => btn.disabled = true);
+                        const selected = block.querySelector(`[data-reaction="${saved}"]`);
+                        if (selected) selected.classList.add('selected');
+                        thanksSpan.textContent = 'Спасибо за отзыв!';
+                    }
+                    
+                    buttons.forEach(btn => {
+                        btn.addEventListener('click', async () => {
+                            const reaction = btn.dataset.reaction;
+                            // Защита от повторного голоса
+                            if (localStorage.getItem(storageKey)) return;
+                            
+                            // Блокируем кнопки
+                            buttons.forEach(b => b.disabled = true);
+                            btn.classList.add('selected');
+                            thanksSpan.textContent = 'Спасибо за отзыв!';
+                            
+                            // Сохраняем
+                            localStorage.setItem(storageKey, reaction);
+                            
+                            // Отправляем в Telegram
+                            const tabLabel = themes.find(t => t.id === tabId)?.label || tabId;
+                            const reactionText = { useful: '👍 Полезно', neutral: '😐 Так себе', outdated: '👎 Устарело' }[reaction];
+                            const message = `📊 <b>Реакция на сайте</b>\n` +
+                                           `Вкладка: ${tabLabel}\n` +
+                                           `Реакция: ${reactionText}\n` +
+                                           `Время: ${new Date().toLocaleString('ru-RU')}\n` +
+                                           `Устройство: ${navigator.userAgent.slice(0, 50)}...`;
+                            await sendTelegramMessage(message);
+                        });
                     });
                 });
             }
 
+            // Инициализация страниц
+            themes.forEach(t => {
+                const page = document.createElement('div');
+                page.id = `page-${t.id}`;
+                page.className = `page ${t.id === 'about' ? 'active-page' : ''}`;
+                pagesDiv.appendChild(page);
+            });
+            renderTabs();
+            renderPage('about');
+            attachFavListeners();
+
+            // Поиск
             document.getElementById('searchInput').addEventListener('input', e => {
                 const term = e.target.value.toLowerCase();
                 const activePage = document.querySelector('.page.active-page');
                 if (!activePage) return;
                 activePage.querySelectorAll('.card').forEach(card => {
-                    const text = card.innerText.toLowerCase();
-                    card.style.display = term === '' || text.includes(term) ? '' : 'none';
+                    card.style.display = term === '' || card.innerText.toLowerCase().includes(term) ? '' : 'none';
                 });
             });
 
+            // Скролл
             const scrollCont = document.querySelector('.pages');
             const topBtn = document.getElementById('scrollTop');
             scrollCont.addEventListener('scroll', () => topBtn.classList.toggle('visible', scrollCont.scrollTop > 200));
             topBtn.addEventListener('click', () => scrollCont.scrollTo({top:0, behavior:'smooth'}));
-
-            renderTabs();
-            renderPages();
 
             tabsDiv.addEventListener('click', e => {
                 const tab = e.target.closest('.tab');
