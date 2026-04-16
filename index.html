@@ -341,9 +341,9 @@
     </style>
 </head>
 <body>
-    <!-- Основное приложение (скроллится) -->
+    <!-- Основное приложение -->
     <div class="app" id="mainApp">
-        <!-- Стартовое соглашение (в потоке, не модальное) -->
+        <!-- Стартовое соглашение -->
         <div class="agreement-screen" id="agreementScreen">
             <div class="agreement-card">
                 <h1>Simple Sandbox 2 Archives</h1>
@@ -368,7 +368,7 @@
             <div>
                 <h1>Simple Sandbox 2 Archives</h1>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="version-link" id="changelogLink">Версия: 1.0.2 Beta • список изменений</span>
+                    <span class="version-link" id="changelogLink">Версия: 1.0.3 Beta • список изменений</span>
                 </div>
             </div>
         </div>
@@ -381,11 +381,24 @@
         <div class="pages" id="pagesContainer"></div>
     </div>
 
+    <!-- Tawk.to Chat -->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/69e100aa630d771c396c9300/1jmbel77m';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
     <script>
         (function(){
             // Service Worker
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("data:application/javascript,self.addEventListener('install',e=>{e.waitUntil(caches.open('ssb2-v10').then(c=>c.addAll(['/'])));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});");
+                navigator.serviceWorker.register("data:application/javascript,self.addEventListener('install',e=>{e.waitUntil(caches.open('ssb2-v11').then(c=>c.addAll(['/'])));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});");
             }
 
             const agreementScreen = document.getElementById('agreementScreen');
@@ -469,14 +482,20 @@
                     </head>
                     <body>
                         <div class="container">
-                            <a href="javascript:history.back()" class="back-btn">← Назад</a>
+                            <a href="./" class="back-btn">← Назад</a>
                             <div class="card">
                                 <h1>Список изменений</h1>
                                 
-                                <h2>🆕 Версия 1.0.2 Beta (текущая)</h2>
+                                <h2>🆕 Версия 1.0.3 Beta (текущая)</h2>
                                 <ul>
-                                    <li>Добавлена форма обратной связи (через Formspree)</li>
+                                    <li>Добавлен онлайн-чат</li>
+                                    <li>Форма обратной связи: уведомление об ответе на почту</li>
+                                    <li>Исправлена кнопка «Назад» в списке изменений</li>
                                     <li>Обновлена контактная почта (hofilionclkc@gmail.com)</li>
+                                </ul>
+
+                                <h2>📝 Версия 1.0.2 Beta</h2>
+                                <ul>
                                     <li>Добавлен раздел «Пасхалки»</li>
                                     <li>Добавлен раздел «Донат»</li>
                                     <li>Добавлен раздел «FAQ»</li>
@@ -752,7 +771,7 @@
                     <div class="quote-item"><strong>❓ Будет ли тёмная тема?</strong><br>Планируется в следующих обновлениях.</div>
                     <div class="quote-item"><strong>❓ Можно ли установить сайт как приложение?</strong><br>Да, сайт поддерживает PWA. Нажмите «Установить приложение» в меню браузера.</div>`,
                 feedback: () => `<h2>Сообщить об ошибке или предложить идею <button class="fav-btn" data-id="feedback">★</button></h2>
-                    <p>Нашли неточность, баг или хотите предложить новую информацию? Заполните форму ниже, и я получу ваше сообщение на почту.</p>
+                    <p>Нашли неточность, баг или хотите предложить новую информацию? Заполните форму ниже — ответ придёт на указанную вами почту.</p>
                     <form class="feedback-form" id="feedbackForm">
                         <select id="feedbackType" required>
                             <option value="" disabled selected>Выберите тему...</option>
