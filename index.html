@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Simple Sandbox 2 Archives</title>
     
-    <!-- Иконка сайта (ваше фото) -->
+    <!-- Иконка сайта -->
     <link rel="icon" type="image/jpeg" href="https://s10.iimage.su/s/16/g1UK3smxWK5EDnSVtZzw6nQXG48Mj6RIhmNtg03qe.jpg">
     <link rel="apple-touch-icon" href="https://s10.iimage.su/s/16/g1UK3smxWK5EDnSVtZzw6nQXG48Mj6RIhmNtg03qe.jpg">
     
@@ -387,77 +387,91 @@
             const tabsScroll = document.getElementById('tabsScroll');
             const changelogLink = document.getElementById('changelogLink');
 
-            // Список изменений — открывается в новом окне
+            // Модальное окно со списком изменений
             changelogLink.addEventListener('click', () => {
                 const isDark = document.body.classList.contains('dark-theme');
                 const bg = isDark ? '#0e1219' : '#d9e2ec';
                 const text = isDark ? '#e0e4eb' : '#0f1a2e';
-                const card = isDark ? 'rgba(20,28,40,0.9)' : 'rgba(255,255,255,0.9)';
+                const card = isDark ? 'rgba(20,28,40,0.95)' : 'rgba(255,255,255,0.95)';
                 const border = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.6)';
                 const head = isDark ? '#fff' : '#0a1a2b';
                 const ver = isDark ? '#a0c4e2' : '#1e3a5f';
 
-                const html = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Список изменений · SSB2 Archives</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-                    <style>
-                        *{margin:0;padding:0;box-sizing:border-box}
-                        body{font-family:Montserrat,sans-serif;background:${bg};min-height:100vh;padding:20px;color:${text}}
-                        .container{max-width:700px;margin:0 auto}
-                        .card{background:${card};backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:28px;padding:24px;border:1px solid ${border};box-shadow:0 20px 40px -8px rgba(0,0,0,0.2)}
-                        h1{font-weight:700;font-size:28px;margin-bottom:20px;text-transform:uppercase;color:${head}}
-                        h2{font-weight:700;font-size:18px;margin:16px 0 10px;color:${ver};text-transform:uppercase}
-                        ul{padding-left:20px}
-                        li{margin:8px 0}
-                        .close-btn{display:inline-block;background:#1e3a5f;color:white;padding:10px 20px;border-radius:40px;text-decoration:none;font-weight:600;margin-bottom:20px;border:1px solid rgba(255,255,255,0.3);cursor:pointer}
-                    </style>
-                    </head>
-                    <body>
-                    <div class="container">
-                        <a class="close-btn" onclick="window.close()">← Назад</a>
-                        <div class="card">
-                            <h1>Список изменений</h1>
-                            <h2>🆕 Версия 1.0.4 Beta (текущая)</h2>
-                            <ul><li>Убрана информация об кейсах! | Но в скором времени появится позже 📌</li></ul>
-                            <h2>📝 Версия 1.0.3 Beta</h2>
-                            <ul>
-                                <li>Добавлена информация о студии SSB FILMS STUDIO</li>
-                                <li>Исправлено отображение списка изменений</li>
-                                <li>Кнопка «Назад» работает корректно</li>
-                                <li>Форма обратной связи: уведомление об ответе на почту</li>
-                                <li>Обновлена контактная почта (hofilionclkc@gmail.com)</li>
-                            </ul>
-                            <h2>📝 Версия 1.0.2 Beta</h2>
-                            <ul>
-                                <li>Добавлен раздел «Пасхалки»</li>
-                                <li>Добавлен раздел «Донат»</li>
-                                <li>Добавлен раздел «FAQ»</li>
-                                <li>Соглашение больше не блокирует скролл страницы</li>
-                            </ul>
-                            <h2>📝 Версия 1.0.1</h2>
-                            <ul>
-                                <li>Добавлен раздел «Кланы» с подробной историей</li>
-                                <li>Добавлен раздел «Моды»</li>
-                                <li>Исправлены стили жидкого стекла</li>
-                            </ul>
-                            <h2>📝 Версия 1.0.0</h2>
-                            <ul>
-                                <li>Первый публичный релиз</li>
-                                <li>Все основные разделы</li>
-                                <li>Система избранного</li>
-                                <li>Поиск по вкладкам</li>
-                                <li>PWA-поддержка</li>
-                            </ul>
-                        </div>
-                    </div>
-                    </body>
-                    </html>
+                // Создаём оверлей
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
+                    z-index: 10000; display: flex; align-items: center; justify-content: center;
+                    padding: 20px;
                 `;
-                const blob = new Blob([html], { type: 'text/html' });
-                window.open(URL.createObjectURL(blob), '_blank');
+
+                // Создаём карточку
+                const modalCard = document.createElement('div');
+                modalCard.style.cssText = `
+                    background: ${card}; backdrop-filter: blur(30px);
+                    -webkit-backdrop-filter: blur(30px); border-radius: 28px;
+                    padding: 24px; max-width: 600px; width: 100%; max-height: 80vh;
+                    overflow-y: auto; border: 1px solid ${border};
+                    box-shadow: 0 25px 50px -8px rgba(0,0,0,0.3);
+                    color: ${text}; position: relative;
+                `;
+
+                // Кнопка закрытия (крестик)
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = '✕';
+                closeBtn.style.cssText = `
+                    position: absolute; top: 16px; right: 16px;
+                    background: none; border: none; font-size: 24px;
+                    cursor: pointer; color: ${text}; opacity: 0.7;
+                    padding: 8px; line-height: 1;
+                `;
+                closeBtn.onmouseover = () => closeBtn.style.opacity = '1';
+                closeBtn.onmouseout = () => closeBtn.style.opacity = '0.7';
+
+                // Контент
+                modalCard.innerHTML = `
+                    <h1 style="font-weight:700;font-size:24px;margin-bottom:20px;text-transform:uppercase;color:${head};">Список изменений</h1>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">🆕 Версия 1.0.4 Beta (текущая)</h2>
+                    <ul style="padding-left:20px;"><li>Убрана информация об кейсах! | Но в скором времени появится позже 📌</li></ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.3 Beta</h2>
+                    <ul style="padding-left:20px;">
+                        <li>Добавлена информация о студии SSB FILMS STUDIO</li>
+                        <li>Исправлено отображение списка изменений</li>
+                        <li>Форма обратной связи: уведомление об ответе на почту</li>
+                        <li>Обновлена контактная почта (hofilionclkc@gmail.com)</li>
+                    </ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.2 Beta</h2>
+                    <ul style="padding-left:20px;">
+                        <li>Добавлен раздел «Пасхалки»</li>
+                        <li>Добавлен раздел «Донат»</li>
+                        <li>Добавлен раздел «FAQ»</li>
+                        <li>Соглашение больше не блокирует скролл страницы</li>
+                    </ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.1</h2>
+                    <ul style="padding-left:20px;">
+                        <li>Добавлен раздел «Кланы» с подробной историей</li>
+                        <li>Добавлен раздел «Моды»</li>
+                        <li>Исправлены стили жидкого стекла</li>
+                    </ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.0</h2>
+                    <ul style="padding-left:20px;">
+                        <li>Первый публичный релиз</li>
+                        <li>Все основные разделы</li>
+                        <li>Система избранного</li>
+                        <li>Поиск по вкладкам</li>
+                    </ul>
+                `;
+                modalCard.appendChild(closeBtn);
+
+                // Функция закрытия
+                const closeModal = () => overlay.remove();
+                closeBtn.addEventListener('click', closeModal);
+                overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+                overlay.appendChild(modalCard);
+                document.body.appendChild(overlay);
             });
 
             // Drag-to-scroll
@@ -492,7 +506,7 @@
                 { id: 'faq', label: 'FAQ' }, { id: 'feedback', label: 'Сообщить об ошибке' }, { id: 'fav', label: 'Избранное' }
             ];
 
-            // Генераторы контента (полностью из предыдущей версии, без изменений)
+            // Генераторы контента
             const contentGenerators = {
                 about: () => `<h2>Об игре <button class="fav-btn" data-id="about">★</button></h2>
                     <p>Simple Sandbox 2 — вторая игра из серии "Simple Sandbox". Разработчик: Игорь Подгайный (Madness Games). Вышла 22 сентября 2019 на Android и 13 марта 2021 на iOS. Более 10 миллионов скачиваний.</p>
@@ -714,7 +728,7 @@
                     <div class="quote-item"><strong>❓ Где скачать Simple Sandbox 2?</strong><br>Игра доступна в Google Play и App Store. Ссылки можно найти на официальных ресурсах Madness Games.</div>
                     <div class="quote-item"><strong>❓ Почему некоторые данные могут быть неточными?</strong><br>Вся информация собрана из открытых источников (вики, YouTube, Telegram). Если вы нашли ошибку — напишите мне.</div>
                     <div class="quote-item"><strong>❓ Будет ли тёмная тема?</strong><br>Планируется в следующих обновлениях.</div>
-                    <div class="quote-item"><strong>❓ Можно ли установить сайт как приложение?</strong><br>Да, сайт поддерживает PWA. Нажмите «Установить приложение» в меню браузера.</div>`,
+                    <div class="quote-item"><strong>❓ Можно ли установить сайт как приложение?</strong><br>Сайт не является приложением, но вы можете добавить его в закладки.</div>`,
                 feedback: () => `<h2>Сообщить об ошибке или предложить идею <button class="fav-btn" data-id="feedback">★</button></h2>
                     <p>Нашли неточность, баг или хотите предложить новую информацию? Заполните форму ниже — ответ придёт на указанную вами почту.</p>
                     <form class="feedback-form" id="feedbackForm">
