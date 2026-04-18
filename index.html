@@ -365,7 +365,7 @@
             <div>
                 <h1>Simple Sandbox 2 Archives</h1>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="version-link" id="changelogLink">Версия: 1.0.4 Beta • список изменений</span>
+                    <span class="version-link" id="changelogLink">Версия: 1.0.5 Beta • список изменений</span>
                 </div>
             </div>
         </div>
@@ -397,7 +397,6 @@
                 const head = isDark ? '#fff' : '#0a1a2b';
                 const ver = isDark ? '#a0c4e2' : '#1e3a5f';
 
-                // Создаём оверлей
                 const overlay = document.createElement('div');
                 overlay.style.cssText = `
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -407,7 +406,6 @@
                     padding: 20px;
                 `;
 
-                // Создаём карточку
                 const modalCard = document.createElement('div');
                 modalCard.style.cssText = `
                     background: ${card}; backdrop-filter: blur(30px);
@@ -418,7 +416,6 @@
                     color: ${text}; position: relative;
                 `;
 
-                // Кнопка закрытия (крестик)
                 const closeBtn = document.createElement('button');
                 closeBtn.innerHTML = '✕';
                 closeBtn.style.cssText = `
@@ -430,11 +427,12 @@
                 closeBtn.onmouseover = () => closeBtn.style.opacity = '1';
                 closeBtn.onmouseout = () => closeBtn.style.opacity = '0.7';
 
-                // Контент
                 modalCard.innerHTML = `
                     <h1 style="font-weight:700;font-size:24px;margin-bottom:20px;text-transform:uppercase;color:${head};">Список изменений</h1>
-                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">🆕 Версия 1.0.4 Beta (текущая)</h2>
-                    <ul style="padding-left:20px;"><li>Убрана информация об кейсах! | Но в скором времени появится позже 📌</li></ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">🆕 Версия 1.0.5 Beta (текущая)</h2>
+                    <ul style="padding-left:20px;"><li>Добавлена вкладка «Руководство» с инструкциями и решениями проблем</li></ul>
+                    <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.4 Beta</h2>
+                    <ul style="padding-left:20px;"><li>Убрана информация об кейсах (появится позже)</li></ul>
                     <h2 style="font-weight:700;font-size:16px;margin:16px 0 10px;color:${ver};">📝 Версия 1.0.3 Beta</h2>
                     <ul style="padding-left:20px;">
                         <li>Добавлена информация о студии SSB FILMS STUDIO</li>
@@ -465,7 +463,6 @@
                 `;
                 modalCard.appendChild(closeBtn);
 
-                // Функция закрытия
                 const closeModal = () => overlay.remove();
                 closeBtn.addEventListener('click', closeModal);
                 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
@@ -496,14 +493,14 @@
                 mainApp.classList.add('visible');
             });
 
-            // Вкладки
+            // Вкладки (добавлена «Руководство»)
             const themes = [
                 { id: 'about', label: 'Об игре' }, { id: 'dev', label: 'Разраб' }, { id: 'media', label: 'Медиа' },
                 { id: 'maps', label: 'Карты' }, { id: 'props', label: 'Пропы' }, { id: 'skins', label: 'Скины' },
                 { id: 'weapons', label: 'Оружие' }, { id: 'vehicles', label: 'Транспорт' }, { id: 'clans', label: 'Кланы' },
                 { id: 'facts', label: 'Факты' }, { id: 'versions', label: 'Версии' }, { id: 'mods', label: 'Моды' },
                 { id: 'reqs', label: 'Требования' }, { id: 'donate', label: 'Донат' }, { id: 'eastereggs', label: 'Пасхалки' },
-                { id: 'faq', label: 'FAQ' }, { id: 'feedback', label: 'Сообщить об ошибке' }, { id: 'fav', label: 'Избранное' }
+                { id: 'guide', label: 'Руководство' }, { id: 'faq', label: 'FAQ' }, { id: 'feedback', label: 'Сообщить об ошибке' }, { id: 'fav', label: 'Избранное' }
             ];
 
             // Генераторы контента
@@ -722,6 +719,29 @@
                         <div class="quote-item"><strong>Animal Head Thing (предмет в виде головы животного).</strong> На карте f_RussianStreet в конце карты нужно найти дом с ключом, висящим на нём. Возьмите ключ и войдите в дом.</div>
                     </div>
                     <p style="margin-top:12px;">Некоторые пасхалки и секреты могут быть связаны с обновлениями игры или багами. Например, в одном из видео упоминались такие элементы, как «откопать могилу» (приз — скин) и «поймать нож на антенне» (приз — нож), но из-за бага могилу на тот момент раскопать было невозможно.</p>`,
+                guide: () => `<h2>Руководство <button class="fav-btn" data-id="guide">★</button></h2>
+                    <div class="quote-item"><strong>🐛 Как сообщить о баге</strong><br>Снимите видео или скриншот, подробно опишите баг, добавьте хэштег #bugs. Отправить можно в <a href="https://t.me/SimpleSandBoxCommunity" target="_blank">@SimpleSandBoxCommunity</a> или <a href="https://t.me/Simplesandbox2reports" target="_blank">@Simplesandbox2reports</a>.</div>
+                    <div class="quote-item"><strong>🚧 Установка карты</strong><br><u>Способ 1 (Android):</u> Установите файловый менеджер, для Android 11+ — Shizuku с откладкой по Wi-Fi. Скачайте файл карты (.clm или .clm.msg.gz) и переместите в <code>Android/data/com.SimpleSandbox2/
+files/Save Maps/</code>.<br><u>Способ 2 (ПК):</u> Скачайте файл, подключите телефон по USB, выберите «Передача файлов» и переместите файл в ту же папку через проводник Windows.</div>
+                    <div class="quote-item"><strong>💬 Текст на табличках в мультиплеере</strong><br>Пропадает, если сервер создан без «Cache Props» или табличка установлена в мультиплеере. Решение: перед созданием сервера включите Cache Props и используйте карту с уже готовыми надписями.</div>
+                    <div class="quote-item"><strong>🔧 Настройка сервера</strong><br>Хост может менять правила: Gameplay (стрельба, стройка, транспорт, NPC, двойной прыжок, сохранение карт, вид от первого лица), World (время, погода, облака, рекламные предметы).</div>
+                    <div class="quote-item"><strong>⚙️ Игровые настройки</strong><br>FPS, подсветка объектов, отображение рук, доступ к транспорту, деформация машин, туман, управление самолётом/машиной, чувствительность, редактор кнопок. Графика: качество, текстуры, тени, вода, лимит FPS. Аудио: общая громкость, музыка, эффекты, сирены.</div>
+                    <div class="quote-item"><strong>🧱 Функции строительства</strong><br>Kinematics — автозаморозка объектов; Free Build — свободная установка; Free Ground — установка внутрь других пропов.</div>
+                    <div class="quote-item"><strong>🚫 Бан за читы</strong><br>Бан «Cheater | Indefinite» может выдаваться по ошибке. Если не использовали читы — бан пропадёт через несколько часов/дней. Никогда не скачивайте читы!</div>
+                    <div class="quote-item"><strong>💎 Как получить донат</strong><br>1. Купить в игре. 2. Через администратора. 3. Участвовать в конкурсах в Telegram-каналах Madness Games. 4. Промокоды (очень редко).</div>
+                    <div class="quote-item"><strong>🔒 Подключение к серверам в РФ</strong><br>Из-за блокировок РКН могут быть проблемы. Решения: VPN, очистка кэша, перезагрузка, отключение прокси, смена интернета, перезаход в аккаунт.</div>
+                    <div class="quote-item"><strong>📱 Не работает реклама</strong><br>Очистите кэш игры, сбросьте рекламный идентификатор (Настройки → Безопасность → Реклама), включите/отключите VPN, отключите персональный DNS или блокировщик рекламы.</div>
+                    <div class="quote-item"><strong>👤 Не подключается аккаунт</strong><br>Перезапустите игру/устройство, очистите кэш, очистите историю поиска в Play Играх, включите/отключите VPN, смените интернет.</div>
+                    <div class="quote-item"><strong>🛡️ Безопасный режим</strong><br>Включается в меню паузы. Урон по вам не регистрируется, но и вы не наносите урон. После отключения нельзя включить 60 секунд. Не спасает от падения под карту.</div>
+                    <div class="quote-item"><strong>🙂 Настройка NPC</strong><br>Наведите прицел на туловище для смены скина, на голову — для смены анимации.</div>
+                    <div class="quote-item"><strong>🚧 Граунды (Grounds)</strong><br>Редактируемые пропы из Others. Обычный (9 текстур, лимит 250), Вода (без текстур, лимит 500), Барьер (2 текстуры, лимит 250).</div>
+                    <div class="quote-item"><strong>👨‍🔧 Улучшение транспорта</strong><br>Поставьте спец. проп из Others и заезжайте в зону. Доступно: Neo (цвет подсветки: 0-3) и Wheels (колёса: 0-15). Только для транспорта с меткой «E».</div>
+                    <div class="quote-item"><strong>🪲 Пропажа купленных элементов</strong><br>Обратитесь к администратору, приложите игровой ID, название доната и чеки. Монеты/кристаллы/ключи восстановлению не подлежат.</div>
+                    <div class="quote-item"><strong>👁️ Активация промокода</strong><br>Внутриигровой магазин → поле «Введите код...» → ввести промокод. При успехе появится «КУПОН АКТИВИРОВАН».</div>
+                    <div class="quote-item"><strong>⚠️ Обнаружение читов</strong><br>Удалите подозрительные файлы из папки «Загрузки». Не скачивайте читы!</div>
+                    <div class="quote-item"><strong>🔄 Смена Google аккаунта</strong><br>Удерживайте иконку игры → «Профиль» → выберите аккаунт → «Сохранить». Должен быть установлен Play Игры. (Проверено на Galaxy S24, Android 16).</div>
+                    <div class="quote-item"><strong>🔧 Восстановление колёс</strong><br>Возьмите гаечный ключ (Player/Items/2), наведите на место колеса (возможно, ниже кузова) и чините. Ключ восстанавливает 125 ед., колёса имеют ~200 ед.</div>
+                    <div class="quote-item"><strong>🚨 Жалоба на игрока</strong><br>1. Сделайте 2+ скриншота/видео нарушения. 2. Добавьте нарушителя в друзья. 3. Сделайте скриншот с его ником в списке друзей. 4. Скопируйте ID (нажав на аватар). Отправьте в группу в теме «Жалобы на игроков» с форматом: Причина | ID. Без полных доказательств жалоба не принимается.</div>`,
                 faq: () => `<h2>FAQ — Часто задаваемые вопросы <button class="fav-btn" data-id="faq">★</button></h2>
                     <div class="quote-item"><strong>❓ Кто создал этот сайт?</strong><br>Сайт создан фанатом игры HoFiLiOn. Это неофициальный архив.</div>
                     <div class="quote-item"><strong>❓ Как связаться с автором?</strong><br>Telegram: <a href="https://t.me/HoFiLiOnclkc">@HoFiLiOnclkc</a><br>Email: <a href="mailto:hofilionclkc@gmail.com">hofilionclkc@gmail.com</a></div>
